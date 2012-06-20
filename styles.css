@@ -1,17 +1,56 @@
 html {
 	font-size: 16px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	background-color: #fff;
-	color: #656262;
+	background-color: #121212;
+	color: #BBB;
 	outline-style: none;
 	outline-width: medium;
 	height: 100%;
 	padding: 25px 50px;
 }
 
+label {
+  width:100px;
+  display:inline-block;
+  float:left;
+  padding-top:4px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding:2px;
+}
+
+#mixURL {
+  width:600px;
+}
+
+#mixName {
+  width:400px;
+}
+
+#mixArtist {
+  width:400px;
+}
+
+#mixCountry {
+  width:200px;
+}
+
+#mixArtwork {
+  width:600px;
+}
+
+#mixDuration {
+  width:200px;
+}
+
 input[type="text"],textarea,input[type="password"],select {
 	padding: 4px;
-	width: 280px;
+	width: 400px;
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;

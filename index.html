@@ -18,6 +18,22 @@
   });
 </script>
 
+<script type="text/javascript">
+  //Define your user by initializing StackMob.User with your JSON.
+  var user = new StackMob.User({ username: 'bzl', password: 'bzl' , position: 'baller' });
+
+   //Define your Mix class once on the page.
+  var mix = StackMob.Model.extend({
+    schemaName: 'mix'
+  });
+
+  var mixes = StackMob.Collection.extend({
+    model: mix
+  });
+
+
+</script>
+
 <!-- Just some CSS styles for prettiness -->
 <link rel="stylesheet" type="text/css" href="styles.css"/> 
 
@@ -26,19 +42,49 @@
 </head>
 <body>
 
-<img src="https://www.stackmob.com/resources/images/logo.png" alt="StackMob Logo"/>
+<img src="http://images.cloob.fm/header_logo_player_micro.png" alt="StackMob Logo"/>
 
 <div class="description">
-This example shows you how you can save and fetch users to your StackMob datastore.  Right click and view the source.
+This test page allows you to save and fetch mixes from your StackMob datastore.  
 </div>
 
-<h1>Create and Fetch new users with your StackMob datastore</h1>
+<h1>Create and Fetch new mixes from StackMob</h1>
 
 <div class="form">
 	<!--Forms that will create and read users--> 
-	<input id="username" type="text" value=""/>
-	<input id="create" type="submit" onclick="create();" value="Create User" class="button"/>
-	<input id="read" type="submit" onclick="read();" value="Fetch User" class="button"/>
+  <ul>
+    <li>
+	    <label>Mix URL: </label>
+      <input id="mixURL" type="text" value="http://test"/>
+    </li>
+    <li>
+      <label>Mix Name: </label>
+      <input id="mixName" type="text" value="Mix Test"/>
+    </li>
+    <li>
+      <label>Artist: </label>
+      <input id="mixArtist" type="text" value="Some Artist"/>
+    </li>
+    <li>
+      <label>Country: </label>
+      <input id="mixCountry" type="text" value="USA"/>
+    </li>
+    <li>
+      <label>Artwork URL: </label>
+      <input id="mixArtwork" type="text" value="Hot Art"/>
+    </li>
+    <li>
+      <label>Duration: </label>
+      <input id="mixDuration" type="text" value="1111111"/>
+    </li>
+    <li>
+      <label>Track List: </label>
+      <textarea id="mixTracks">1. Baller - Experimental (Bush Remix)&#10;2. Balls Deep - IHA (Original Mix)&#10;3. Ballertime - Sweet Low (Dubby Dub)&#10;4. Ballin' - Uncle Drew (Baller Mix)&#10;5. Balls - Low Hanging (Original Mix)
+      </textarea>
+    </li>
+  </ul>
+	<input id="create" type="submit" onclick="create();" value="Create Mix" class="button"/>
+	<input id="read" type="submit" onclick="parseTracks();" value="Parse Mix" class="button"/>
 </div>
 
 <div class="results_header"><h1>Results</h1> <div class="results_objectbrowser">You can also view your data via the web-based <a href="https://www.stackmob.com/platform/api/schemas/browser" target="_blank">Object Browser</a> on StackMob.</div></div>
@@ -58,23 +104,58 @@ StackMob's server responses will show up here after you submit your form.
 <!-- JAVASCRIPT CODE AND STACKMOB JS SDK EXAMPLES BELOW! -->
 <script type="text/javascript">
   /* No jQuery syntax is being used below so that there's no confusion around what's unique to StackMob's JS SDK syntax*/
+
+  function parseTracks(trackString) {
+    //var trackString = document.getElementById('mixTracks').value;
+    var lines = trackString.split(/\r?\n/);
+    var tracks = [];
+
+    for(var i = 0; i < lines.length; i+=1) {
+      var track = parseLine(lines[i]);
+      if(track['artist'] === undefined || track['title'] === undefined) {
+        break;
+      } else {
+        tracks[i] = track;
+      }
+    }
+
+    function parseLine(line) {
+      var match = line.match(/^(\d+)\.\s*([^-]+?)\s*-\s*([^(]+?)\s*\((.*)\)/);
+      if (match) {
+        var artist = match[2], title = match[3], remix = match[4];
+      }
+
+      return({artist: artist, title: title, remix: remix});       
+    }
+    console.debug(tracks);
+    return(tracks);
+  }
   
   /* This runs when you click on the "Create User" button */
   function create() {
   	//Get the username from the form field
-    var username = document.getElementById('username').value;
+    var mixURL = document.getElementById('mixURL').value;
+    var mixName = document.getElementById('mixName').value;
+    var mixArtist = document.getElementById('mixArtist').value;
+    var mixCountry = document.getElementById('mixCountry').value;
+    var mixArtwork = document.getElementById('mixArtwork').value;
+    var mixDuration = document.getElementById('mixDuration').value;
+    var mixTracks = document.getElementById('mixTracks').value;
     
     //If the username isn't empty
-    if (username != '') {
+    if (mixURL != '') {
     
       //prepare the user as JSON
-	  var userjson = {
-        'username': username,
-        'password': 'afakepassword',
-        'age': 30, //add on any custom fields you like
-        'title': 'developer'
+	  var mixjson = {
+        mix_url: mixURL,
+        mix_name: mixName,
+        mix_artist: mixArtist,
+        mix_country: mixCountry,
+        mix_artwork: mixArtwork,
+        mix_duration: mixDuration,
+        mix_tracks: mixTracks        
       };
-    
+
     
       /* #########################################
        * START STACKMOB JS CODE
@@ -82,12 +163,30 @@ StackMob's server responses will show up here after you submit your form.
     
       //Create a local instance of your User object.  StackMob gives you a User object out of the box.
       //Pass your JSON into the User constructor
-      
-      var user = new StackMob.User(userjson);
+
+      var newMix = new mix(mixjson);
+
+  /*newMix.create({
+    success: function(model) {
+      //Great Scott! We've saved the task to StackMob!  Let's see what we get back.
+      //console.debug(model.get('mix')); //Prints "Go back and save Marty!"
  
+      //StackMob auto generates a unique ID for your object
+      //after creating it server-side in the format of [schemaName]_id
+      //console.debug('ID is: ' + model.get('mix_id'));
+ 
+      //And let's fetch the task from StackMob again AFTER the object has been saved server side for sake of example.
+      newMix.fetch({
+        success: function(model) {
+          console.debug(model.toJSON());
+        }
+      });
+    }
+  });*/
+
 	  //This makes an AJAX call telling StackMob's servers to save this user on the server side
 	  //StackMob will add new columns to your schema if they don't exist yet.  E.g., age, title..
-      user.create(callbacks());
+      newMix.create(callbacks());
       
       /* #########################################
        * END STACKMOB JS CODE

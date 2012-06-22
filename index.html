@@ -87,6 +87,8 @@ This test page allows you to save and fetch mixes from your StackMob datastore.
 	<input id="create" type="submit" onclick="create();" value="Create Mix" class="button"/>
 	<input id="read" type="submit" onclick="parseTracks(document.getElementById('mixTracks').value);" value="Parse Mix" class="button"/>
   <input id="fetch" type="submit" onclick="read();" value="Read Mix" class="button"/>
+  <input id='clear' type="submit" onclick="clearDB();" value="Clear DB" class="button"/>
+  <input id="insertTracks" type="submit" onclick="saveTracksToDB(parseTracks(document.getElementById('mixTracks').value));" value="Insert Tracks" class="button"/>
 </div>
 
 <div class="results_header"><h1>Results</h1> <div class="results_objectbrowser">You can also view your data via the web-based <a href="https://www.stackmob.com/platform/api/schemas/browser" target="_blank">Object Browser</a> on StackMob.</div></div>
@@ -134,17 +136,151 @@ StackMob's server responses will show up here after you submit your form.
   }
 
   function saveTracksToDB(parsedTracks) {
-
+   
     if (parsedTracks === undefined) {
       return undefined;
     }
 
-    for(var i = 0; i < parsedTracks.length; i+=1) {
+    for(var i = 0; i < 1; i+=1) {
+      var inputMixTrack = new mix_track({
+        position: 0,
+        start_time: 0,
+        duration: 0
+      });
+
+      var inputTrack = new track ({
+        title: parsedTracks[i].title
+      });
+
+      var inputAlias = new alias ({
+        alias: parsedTracks[i].artist
+      });
+
+      var inputRemix = new remix ({
+        remix: parsedTracks[i].remix
+      });
+
+      var trackTitle = parsedTracks[i].title;
+
+      inputTrack.create({success: function(parsedTracks) {
+        console.debug('Track creation was successful for ' + trackTitle);
+        inputTrack.addRelationship('alias', inputAlias, {success: console.debug('Track alias input was successful!')});
+        inputTrack.addRelationship('remix', inputRemix, {success: console.debug('Track remix input was successful!')});
+        inputMixTrack.create({ success: function(parsedTracks) {
+          console.debug('Mix_Track creation was successful for ' + trackTitle);
+          inputMixTrack.addRelationship('track', inputTrack, {success: console.debug('Track input was successful!')});
+        }});
+      }});
 
 
-    }
+
+    }        
 
   }
+
+  /* This takes a collection object and deletes all of the objects in it */
+  function clearCollection(modelname) {
+    var targetCollection = StackMob.Collection.extend({model: alias});
+    var thisCollection = new targetCollection();
+
+    thisCollection.fetch({success: function(collection) {
+      var collectionJSON = thisCollection.toJSON();
+
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var delObject = new window[alias]();
+        delObject.destroy();
+      }
+
+    }});
+    
+  }
+
+  function clearAliasDB() {
+    var nameCollection = StackMob.Collection.extend({model: alias}), targetCollection = new nameCollection();
+        
+    targetCollection.fetch({success: function(collection) {
+      var collectionJSON = targetCollection.toJSON();     
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var deleteObject = new alias(collectionJSON[i]);
+        deleteObject.destroy();
+      }
+    }});
+  }
+
+  function clearTrackDB() {
+    var nameCollection = StackMob.Collection.extend({model: track}), targetCollection = new nameCollection();
+        
+    targetCollection.fetch({success: function(collection) {
+      var collectionJSON = targetCollection.toJSON();     
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var deleteObject = new track(collectionJSON[i]);
+        deleteObject.destroy();
+      }
+    }});
+  }
+
+  function clearMix_urlDB() {
+    var nameCollection = StackMob.Collection.extend({model: mix_url}), targetCollection = new nameCollection();
+        
+    targetCollection.fetch({success: function(collection) {
+      var collectionJSON = targetCollection.toJSON();     
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var deleteObject = new mix_url(collectionJSON[i]);
+        deleteObject.destroy();
+      }
+    }});
+  }
+
+  function clearRemixDB() {
+    var nameCollection = StackMob.Collection.extend({model: remix}), targetCollection = new nameCollection();
+        
+    targetCollection.fetch({success: function(collection) {
+      var collectionJSON = targetCollection.toJSON();     
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var deleteObject = new remix(collectionJSON[i]);
+        deleteObject.destroy();
+      }
+    }});
+  }
+
+  function clearMix_trackDB() {
+    var nameCollection = StackMob.Collection.extend({model: mix_track}), targetCollection = new nameCollection();
+        
+    targetCollection.fetch({success: function(collection) {
+      var collectionJSON = targetCollection.toJSON();     
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var deleteObject = new mix_track(collectionJSON[i]);
+        deleteObject.destroy();
+      }
+    }});
+  }
+
+  /* This runs when you click on the "Clear DB" button; wipes out all info in DB */
+  function clearDB() {
+
+    // Terrible way of doing it I know
+
+    var mixCollection = StackMob.Collection.extend({model: mix});
+    var targetCollection = new mixCollection();
+        
+    targetCollection.fetch({success: function(collection) {
+      var collectionJSON = targetCollection.toJSON();
+     
+      for(var i = 0; i < collectionJSON.length; i+=1) {
+        var deleteObject = new mix(collectionJSON[i]);
+        deleteObject.destroy();
+      }
+
+    }});
+
+    clearAliasDB();
+    clearTrackDB();
+    clearMix_urlDB();
+    clearRemixDB();
+    clearMix_trackDB();
+    $('#results').text('Database has been cleared!');
+  }
+
   
   /* This runs when you click on the "Create User" button */
   function create() {

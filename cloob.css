@@ -1,0 +1,920 @@
+@charset "utf-8";
+
+/* ----------------  Page CSS  --------------------*/
+
+img, html, body, div, #searchsubmit, #header #clooblogo, #menu .menu_container ul li:hover a  {	
+}
+
+html {
+	/*background:transparent url(http://images.cloob.fm/background/whitestripes.png) repeat scroll 0 0;*/
+	background: none repeat scroll 0 0 #121212;
+	font-family: 'Lucida Grande','Lucida Sans Unicode',Verdana,Arial,Helvetica,sans-serif;
+	color:#bbbbbb;
+	height:100%;
+}
+
+body {
+	/*background:transparent url(http://images.cloob.fm/background/gradient_top.png) repeat-x fixed 0 0;*/
+	font-size:100%;
+	margin:0px;
+	height:100%;
+	min-width: 1010px;
+	min-height: 690px;
+}
+
+a {
+	color: #00ff36;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+
+/* ----------------  Header CSS  --------------------*/
+
+#header {
+	position:relative;
+	height:50px;	
+	width:982px;
+	margin: 0 auto;
+}
+
+/* ----------------------  General Attributes CSS  ---------------------*/
+
+h2, h2 a, h3, h3 a, .author, .date {
+	color:#ffffff;
+	font-weight:normal;
+}
+
+h4 {
+	color:#ffffff;
+	margin: 30px 0px 5px 0px;	
+	font-size:0.85em;
+}
+
+#fb_login_header {
+	background: #121212;
+	height:45px;
+	width:100%;
+}
+
+#fb_login_container {
+	float:right;	
+	margin:15px 50px 0;
+	display:none;
+}
+
+
+/*----------- For SoundManager2 ----------*/
+
+#soundmanager-debug {
+	font-size:75%;	
+	width:900px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.pump_marker {
+	background-image:url(http://images.cloob.fm/green_wav.png);
+	width:20px;
+	border-radius: 5px 5px 0 0;
+	height:100%;
+	bottom:35px;
+	position: absolute !important;
+}
+
+#scoreboard {
+	background-image: url(http://images.cloob.fm/wavform_grad.png);
+	background-color: #161616;
+	background-position:0 -30px;
+	position:absolute;
+	left:795px;
+	width:100%;
+	top:0;
+	border-radius:25px 0px 0px 50px;
+	display:none;
+	/*border-left:2px solid #aaaaaa;*/
+}
+
+#scoreboard table {
+	color: #c1bfbf;
+	font-size: 11px;
+	padding:3px;
+	margin:0px 15px 0px;  
+	line-height:100%;
+}
+
+#scoreboard td {
+	text-align:right;	
+}
+
+#soundmanager-debug {
+    border: 3px solid #222222;
+    border-radius: 25px 5px 25px 5px;
+    font-size: 75%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+    width: 900px;
+    overflow:auto;
+}
+
+#title_logo {
+	position:absolute;
+	top:0;
+	left:0;	
+	margin:8px;
+}
+
+#title_logo a {
+	height:100%;
+	width:100%;	
+	border:none;
+}
+
+#title_logo img {
+	border:none;	
+}
+
+#fpump {
+	top:264px;
+	left:774px;
+	position:absolute;
+	display:none;
+	z-index:5;
+}
+
+#fpump a {
+	background-image: url("http://images.cloob.fm/fist_pump.png");
+    display: block;
+    height: 186px;
+    width: 186px;	
+    margin: 0 auto;
+}
+
+#fpump a:active, #fpump a.active {
+	background-position:0px 185px;	
+}
+
+#top_dash {
+	width: 982px;
+	margin: 0 auto;	
+	height:50px;
+	position:relative;
+}
+
+#title_banner {
+	background-image: url(http://images.cloob.fm/wavform_grad.png);
+	background-color:#161616;	
+	background-position:0 -30px;
+	border-radius: 0px 25px 50px 0px;	
+	/*border-right:2px solid #aaa;*/
+	position:absolute;
+	height:55px;
+	width:1000%;
+	top:0;
+	right:150px;
+	z-index:-10;
+}
+
+#dash_title_block {
+	margin:0 auto;
+	padding-top:5px;
+	padding-bottom:2px;
+}
+
+#dash_artist_block {
+	margin:0 auto;	
+	text-align:center;
+}
+
+#dash_title_block h2, #dash_artist_block h3 {
+	text-align: center;	
+	margin:0;
+	font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	color:#828282;
+}
+
+#dash_title_block h2 {
+	font-size: 16px;	
+}
+
+#dash_artist_block h3 {
+	font-size: 14px;	
+	display:inline-block;
+}
+
+#dash_title_block h2 a, #dash_artist_block h3 a {
+	color:#b2b2b2;	
+}
+
+#stop_watch {
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+
+#stop_watch ul {
+	list-style: none;	
+	color: #c1bfbf;
+	padding:0;
+	text-align:right;
+	margin-right:20px;
+	margin-top:4px;
+	line-height:40px;
+}
+
+#time_elapsed {
+	color: #FFFFFF;
+	font-size: 24px;
+}
+
+#time_remaining {
+	font-size:20px;	
+}
+
+#track_map_section {
+	width:100%;
+	position:relative;
+	height:60px;
+}
+
+#track_map_container {		
+	margin:0 auto;
+	width:960px;
+	height:70px;
+	position:relative;
+	text-align:center;
+}
+
+#track_map_container>p {
+	position:absolute;
+	top:-12px;
+	left:425px;	
+}
+
+#track_map_list {
+	margin:0 auto;
+	width:100%;	
+	padding:0px;
+	margin-left:4px;
+	bottom:5px;
+	position:absolute;
+}
+
+#track_map_list li {
+	display: inline;
+	list-style-type: none;	
+	text-align:center;
+	font-size:10px;
+	font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+#track_map_list div {
+	float:left;
+	//border:1px solid #b2b2b2;
+	background: #121212;
+	border-radius:30px 5px;
+	height:25px;
+	//padding-top:6px;
+	position:relative;
+	line-height:24px;
+	user-select:none;
+	-moz-user-select: none;
+  	-khtml-user-select: none;
+}
+
+#track_map_list div:hover {
+	background: #121212;
+}
+
+#track_map_play_overlay {
+	background-image:url(http://images.cloob.fm/green_wav.png);
+	width:0px;
+	height:31px;
+	bottom:2px;
+	position: absolute !important;	
+	/*border-left:3px solid #8D8D8D;*/
+	/*border-left:2px solid #00801C;*/
+	border-right:4px double #00801C;
+	display:none;
+	border-radius:10px;
+}
+
+#track_map_loop_overlay {
+	background-image:url(http://images.cloob.fm/orange_wav.png);
+	border:2px solid #ffb22a;
+	border-radius:8px;
+	display:none;	
+	/*height:31px;*/
+	height:33px;
+	width:0px;
+	bottom:-1px;
+	position:absolute;
+	opacity:0.75;
+}
+
+#track_map_load_overlay {
+	background-image: url(http://images.cloob.fm/wavform_grad.png);
+	position: absolute !important;	
+/*	height:34px;*/
+	height:70px;
+	width:0px;
+	border-left:1px solid #3a3a3a;
+	border-right:1px solid #3a3a3a;
+	border-top:1px solid #3a3a3a;
+	border-radius:10px;
+	top:0;
+}
+
+#track_single_container {
+	position:absolute;
+	top:0;
+	height:50%;
+	width:100%;
+}
+
+#track_mix_container {
+	position:absolute;
+	bottom:0;
+	height:50%;
+	width:100%;
+}
+
+#track_list {
+	display:none;
+	position:absolute;
+	top:90px;
+	right:0;	
+	height:315px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	z-index:2;
+	width:98%;
+	opacity:0.75;
+}
+
+#track_list ol {
+    counter-reset:li; /* Initiate a counter */
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */	
+}
+
+#track_list ol>li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 4px 2em; /* Give each list item a left margin to make room for the numbers */
+    padding:4px 8px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+    border-top:2px solid #666;
+    background:#f6f6f6;
+    border-radius:0px 0px 0px 5px;
+    font-size:14px;
+}
+
+#track_list ol li.playing {
+	background-image:url(http://images.cloob.fm/blue_wav.png) !important;
+}
+
+#track_list ol li.odd:hover, #track_list ol li.even:hover {
+	background:#333;	
+}
+
+#track_list ol>li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+    padding:3px;
+    border-top:2px solid #666;
+    color:#fff;
+    background:#666;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+    border-radius:5px 0px 0px 10px;
+}
+
+#track_list ol li.odd {
+	background:#454545;	
+}
+
+#track_list ol li.even {
+	background:#404040;
+}
+
+#track_single_play_overlay {
+	background-image:url(http://images.cloob.fm/blue_wav.png);
+	width:0px;
+	height:31px;
+	top:1px;
+	position: absolute !important;	
+	/*border-left:3px solid #8D8D8D;*/
+	/*border-left:2px solid #1c1cff;*/
+	border-right:4px double #1c1cff;
+	display:none;
+	border-radius:10px;
+}
+
+.playbutton {
+	background-image: url(http://images.cloob.fm/play_sprite_micro.png);
+	background-position: 0px 0px;
+	position: absolute;
+	left:28px;
+	top:-5px;
+	height:60px;
+	width:60px;
+	z-index:20;
+}
+
+.playbutton a, .pausebutton a {
+	display:block;	
+	height:40px;
+	width:40px;
+	margin:10px;
+}
+
+.playbutton:hover {
+	/*background-position: -114px 0px;*/
+	background-position:-60px 0px;
+}
+
+.pausebutton {
+	background-image: url(http://images.cloob.fm/play_sprite_micro.png);
+	background-position: 0px -60px;
+	position: absolute;
+	left:28px;
+	top:-5px;
+	height:60px;
+	width:60px;
+	z-index:20;
+}
+
+.pausebutton:hover {
+	background-position: -60px -60px;	
+}
+
+.loopbuttonOff {
+	background-image: url(http://images.cloob.fm/loop_sprite_supermicro.png);
+	background-position: 0px -40px;
+	position: absolute;
+	left:66px;
+	top:33px;
+	height:40px;
+	width:40px;	
+	z-index:21;
+}
+
+.loopbuttonOff:hover {
+	background-position: -40px -0px;
+}
+
+.loopbuttonOff a, .loopbuttonOn a {
+	display:block;
+	height:20px;
+	width:20px;
+	margin:10px;
+}
+
+.loopbuttonOn {
+	background-image: url(http://images.cloob.fm/loop_sprite_supermicro.png);
+	background-position: 0px 0px;
+	position: absolute;
+	left:66px;
+	top: 33px;
+	height:40px;
+	width:40px;	
+	z-index:21;
+}
+
+.loopbuttonOn:hover {
+	background-position: -40px -40px;
+}
+
+#track_map_graph {
+	width:960px;
+	min-height:400px;
+	margin-left:auto;
+	margin-right:auto;	
+	margin-bottom:10px;
+	background-color: #1C1C1C;
+    border-radius: 10px;
+    position:relative;
+    margin-top:30px;
+    clear:both;
+}
+
+.light_graph {
+	background-color:#1f1f1f;
+	height:45px;
+	width:100%;	
+	position:relative;
+}
+
+.dark_graph {
+	background-color:#1a1a1a;
+	height:45px;
+	width:100%;
+	position:relative;
+}
+
+.top_graph {
+	border-radius: 10px 10px 0 0 ;	
+}
+
+.bottom_graph {
+	border-radius: 0 0 10px 10px;	
+}
+
+#fpump_container {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;	
+	border-radius: 10px;
+	background-color:#ffffff;
+	opacity:0.15;
+}
+
+#fpump_world {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;	
+}
+
+#album_art {
+/*	background-image: url(http://images.cloob.fm/SHM.jpg);*/
+/*	background-image: url(http://images.cloob.fm/MADEON.jpg);*/
+/*	background-image: url(http://images.cloob.fm/POYNDEXTER.jpg);*/
+	background-color:black;
+	background-repeat:no-repeat;
+	background-position:center;
+	width:100%;
+	height:450px;
+	position:absolute;
+	z-index:1;
+	border-radius:10px;
+	/*border-radius:10px 35px;*/
+	top:0;
+	opacity:0.15;
+}
+
+#track_title {
+	margin:0 auto;
+	text-align:center;
+	height:20px;
+	position:absolute;
+	top:5px;	
+	width:100%;
+}
+
+#track_title p {
+	margin:0 auto;	
+	position:relative;
+	display:none;
+}
+
+#track_mix_cursor {
+	width:1px;
+	height:80%;
+	background:#00ff36;
+	display:none;
+	position:absolute;	
+	z-index:20;
+	top:10%;
+}
+
+#track_single_cursor {
+	width:1px;
+	height:80%;
+	background:#1c1cff;
+	display:none;
+	position:absolute;	
+	z-index:20;
+	top:10%;	
+}
+
+.previous_track {
+	background-image: url(http://images.cloob.fm/trackskip_sprite_micro.png);
+	background-position: 0px -36px;
+	background-repeat:no-repeat;
+	position: absolute;
+	left:0px;
+	top: 7px;
+	height:36px;
+	width:48px	
+}
+
+.previous_track:hover {
+	background-position: -48px -36px;
+}
+
+.previous_track a, .next_track a {
+	display:block;
+	height:20px;
+	width:32px;
+	margin:8px;
+}
+
+.next_track {
+	background-image: url(http://images.cloob.fm/trackskip_sprite_micro.png);
+	background-position: 0px 0px;
+	background-repeat:no-repeat;
+	position: absolute;
+	left:68px;
+	top: 7px;
+	height:36px;
+	width:48px	
+}
+
+.next_track:hover {
+	background-position: -48px 0px;
+}
+
+#fpump_drag {
+	width:40px;
+	height:40px;
+	position:absolute;
+	cursor:move;
+	top:0px;
+	right:0px;
+}
+
+#fpump_drag:hover, #fpump_drag:active {
+	background-image: url(http://images.cloob.fm/move_arrow.png);	
+}
+
+#footer {
+	height:25px;
+	width:100%;	
+	font-size:10px;
+	position:absolute;
+	bottom:0px;	
+}
+
+#footer_contents {
+	color:#999999;
+	background-image: url(http://images.cloob.fm/wavform_grad.png);
+	background-color:#161616;
+	background-position:0px -10px;
+	margin: 0px auto;
+	width: 500px;
+	height:20px;
+	border-radius:15px 15px 5px 5px;
+	/*border-left:2px solid #aaa;
+	border-right:2px solid #aaa;*/
+}
+
+
+#footer_contents nav {
+	margin-left:20px;
+}		
+
+#footer_contents ul {
+	padding:0px;
+	margin:0px;
+}
+
+#footer_contents li {
+	display:inline;
+	float:left;
+	margin: 4px 0px 0px;
+}
+
+#footer_contents li:first-child::before {
+	display:none;
+}
+
+#footer_contents li::before {
+	content:"∙";
+	float:left;
+	padding: 0px 5px;
+}
+
+#footer_copyright {
+	float:right;
+	margin:4px 20px 0px;
+}	
+
+.player_controls {
+	position:absolute;
+	width:116px;
+	height:100%;	
+	top:0px;
+	right:25px;
+}
+
+.country_icon {
+	background-image: url(http://images.cloob.fm/flag_sprite.png);
+	background-position:0px -48px;
+	width:24px;
+	height:24px;
+	display:inline-block;
+	margin-left:2px;
+	margin-bottom:-9px;
+}
+
+#current_track, #current_track span {
+	font-size:24px;
+}
+
+#loop_counter {
+	font-size:20px;
+	display:none;
+	color:#ffb22a;
+}
+
+#body_container {
+	height:100%;
+	min-height:690px;
+	width:100%;	
+	position:relative;
+	overflow:hidden;
+}
+
+#spacer {
+	float:left;
+	height:50%;
+	margin-bottom:-400px;	
+}
+
+#trk_loop {
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
+#trk_loop ul {
+	list-style: none;	
+	color: #c1bfbf;
+	padding:0;
+	text-align:left;
+	margin-left:20px;
+	margin-top:4px;
+	line-height:40px;
+}
+
+
+/*  Popup Messaging */
+
+
+#popup_message {
+	background:#2a2a2a;
+	min-height:100px;
+	opacity:0.95;	
+	/*margin-left:-50%;
+	margin-top:-50px;*/
+	padding:0 20px;
+	border-radius:10px;
+	text-align:center;
+	font-size:80px;
+	display:none;
+	/*position:relative;*/
+}
+
+#popup_message:hover{
+	background:#666;
+}
+
+
+#popup_message.unhovered:hover{
+	background:#2a2a2a;
+}
+
+#popup_container {
+	position:absolute;
+	top:40%;
+/*	left:50%;*/	
+	z-index:20;
+	width:100%;
+	display:table;
+	text-align:center;
+}
+
+.popup_click {
+	display:block;
+	width:100%;
+	
+	height:100%;
+	color:#fff;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.popup_click:hover {
+	/*background-color:#aaa;	*/
+	text-decoration:none;
+	border-radius:10px;
+	opacity:0.5;	
+}
+
+#footer_container {
+	width:982px;
+	margin:0 auto;	
+	position:relative;
+}
+
+
+/* Keyboard Shortcuts Container */
+
+#key_shortcuts {
+	position:absolute;
+	top:2px;
+	right:11px;
+	height:100%;
+}
+
+#key_shortcuts {
+	color: #666;
+	height:12px;
+	width:12px;
+	font-size:10px;
+	border-radius:4px;
+	border:1px solid #666;
+	padding:2px;
+	text-align:center;
+	display:block;
+	text-decoration:none;
+}
+
+#key_shortcuts:hover {
+	background:#333;	
+}
+
+#key_shortcuts span, #key_shortcuts .unhovered {
+	display:none;	
+}
+
+#key_shortcuts:hover span, #key_shortcuts .hovered {
+	display:block;	
+}
+
+#key_shortcuts_tooltip {
+	display:block;
+	background:#333;
+	width:150px;
+	height:auto;
+	border:1px solid #333;
+	border-radius:10px;
+	position:absolute;
+	right:-9px;
+	bottom:30px;
+	opacity:0.95;
+	color:#aaa;
+	padding:6px;
+	z-index:100;
+}
+
+#key_shortcuts_tooltip .tooltip_arrow {
+	position:absolute;
+	bottom:-16px;
+	right:10px;	
+}
+
+.tooltip_arrow {
+	width:0;
+	height:0;
+	border:8px solid #333;	
+}
+
+.tooltip_arrow_down {
+	border-left-color:transparent;
+	border-right-color:transparent;
+	border-bottom-color:transparent;	
+}
+
+#key_shortcuts_tooltip table {
+	text-align:left;
+	color:#aaa;	
+}
+
+.kshortcut {
+	text-align:center;	
+	padding:6px;
+}
+
+.kshortcut b {
+	border:1px solid #666;
+	border-radius:4px;
+	padding:2px 6px;	
+}
+
+
+
+

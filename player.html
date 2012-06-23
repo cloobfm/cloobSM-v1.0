@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Cloob.fm: Interactive Listening </title>
+	<link rel="Shortcut Icon" href="http://images.cloob.fm/favicon.ico" />
+	<link rel="stylesheet" href="cloob.css" type="text/css" media="screen"/>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.mouse.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.draggable.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.slider.js"></script>
+	<script type="text/javascript" src="js/soundmanager2.js"></script>
+	<script type="text/javascript" src="js/cloob.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
+	<script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.3.3-min.js"></script>
+	<script type="text/javascript" src="http://static.stackmob.com/js/backbone-0.9.2-min.js"></script>
+	<script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.3.0-min.js"></script>
+	 
+	<!-- Initialize the StackMob JS SDK -->
+	<script type="text/javascript">
+	  StackMob.init({
+	    appName: "cloobjson",
+	    clientSubdomain: "ambertyeung",
+	    apiVersion: 0
+	  });
+	</script>
+
+	<script type="text/javascript">
+	  //Define your user by initializing StackMob.User with your JSON.
+	  var user = new StackMob.User({ username: 'bzl', password: 'bzl' , position: 'baller' });
+
+	   //Define your Mix classes once on the page.
+	  var mix = StackMob.Model.extend({schemaName: 'mix'}),
+	    track = StackMob.Model.extend({schemaName: 'track'}),
+	    mix_track = StackMob.Model.extend({schemaName: 'mix_track'});
+	    
+	  var mixes = StackMob.Collection.extend({model: mix});
+
+	</script>
+	
+</head>
+
+<body>
+	<div id="body_container">
+
+	<div id="header">
+		<div id="title_logo"><a href="http://cloob.fm"><img src="http://images.cloob.fm/header_logo_player_micro.png"/></a></div>
+			<div id="scoreboard">
+			<table>
+			<tr><td> Total Pumps:</td><td id="num_pumps-838">1,000,001<!-- ?php echo get_num_pumps(); ?--></td></tr>
+			<tr><td>Session Pumps:</td><td id="num_user_current_pumps-838">0</td></tr>
+			</table>
+		</div>
+	</div>
+
+	<div id="top_dash">
+			<div id="dash_title_block">
+				<h2>
+					<a href="/"></a>
+				</h2>
+			</div>
+			<div id="dash_artist_block">
+				<h3>by <a href="/"></a></h3>
+				<span class="country_icon"></span>			
+			</div>
+		<div id="title_banner"></div>
+
+		<div class="player_controls">
+			<div class="previous_track">
+				<a class="previous_track_button" href="#"></a>
+			</div>
+			<div class="playbutton">
+				<a class="sm2_button" href="#"></a>
+			</div>
+			<div class="loopbuttonOff">
+				<a class="loop_button_a" href="#"></a>
+			</div>
+			<div class="next_track">
+				<a class="next_track_button" href="#"></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="spacer"></div>
+	<div id="track_map_graph">
+		<div id="fpump">
+			<a href="#"></a>
+			<div id="fpump_drag"></div>
+		</div>
+		<div id="album_art"></div>
+		<div class="light_graph top_graph"></div>
+		<div class="dark_graph"></div>
+		<div class="light_graph"></div>
+		<div class="dark_graph"></div>
+		<div class="light_graph"></div>
+		<div class="dark_graph"></div>
+		<div class="light_graph"></div>
+		<div class="dark_graph"></div>
+		<div class="light_graph"></div>
+		<div class="dark_graph bottom_graph"></div>
+
+		<div id="fpump_container">
+		</div>	
+		<div id="trk_loop">
+			<ul>
+				<li id="current_track"><span style="color:#fff"></li>
+				<li id="loop_counter">[ LOOP ]<!--/<font size="-1">1</font--></li>
+			</ul>
+		</div>
+		<div id="stop_watch">
+			<ul>
+				<li id="time_elapsed">+ 0:00:00.0</li>
+				<li id="time_remaining">- 1:59:25.0</li>
+			</ul>
+		</div>
+		<div id="track_list"><ol></ol></div>
+
+		<div id="popup_container">
+			<div id="popup_message">START<a class="popup_click" href="#"></a></div>
+		</div>
+
+	</div>
+
+	<div id="track_map_section">
+			<div id="track_map_container">
+			<p></p>
+			<div id="track_map_load_overlay"></div>
+			<div id="track_single_container">
+				<div id="track_single_play_overlay"></div>
+				<div id="track_title"><p></p></div>
+				<div id="track_single_cursor"></div>
+			</div>
+			<div id="track_mix_container">
+				<ul id="track_map_list"></ul>
+				<div id="track_map_play_overlay"></div>
+				<div id="track_map_loop_overlay"></div>
+				<div id="track_mix_cursor"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div id="footer_container">
+			<div id="footer_contents">
+				<nav>
+					<ul>
+					</ul>
+				</nav>
+				<div id="footer_copyright">Cloob.fm © 2012</div>
+			</div>
+
+			<div id="key_shortcuts">
+					<b>K</b>
+					<span id="key_shortcuts_tooltip">
+						<b>Keyboard Shortcuts</b>
+						<table>
+							<thead>
+								<tr>
+									<th colspan="2"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="kshortcut">
+										<b>P</b>
+									</td>
+									<td>Pump</td>
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>Space</b>
+									</td>
+									<td>Play/Pause</td>
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>L</b>
+									</td>
+									<td>Loop TRK</td>
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>,</b>
+									</td>
+									<td>Rewind</td>
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>.</b>
+									</td>
+									<td>Fast Forward</td>
+								<tr>
+									<td class="kshortcut">
+										<b>&larr;</b>
+									</td>
+									<td>Previous TRK</td>
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>&rarr;</b>
+									</td>
+									<td>Next TRK</td>	
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>M</b>
+									</td>
+									<td>Mute</td>	
+								</tr>
+								<tr>
+									<td class="kshortcut">
+										<b>T</b>
+									</td>
+									<td>TRK List</td>	
+								</tr>
+							</tbody>
+						</table>
+						<span class="tooltip_arrow tooltip_arrow_down"></span>
+					</span>
+				<!--/a-->
+			</div>
+		</div>
+	</div>
+
+	</div>
+</body>
+</html>
